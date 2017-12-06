@@ -1,4 +1,4 @@
-package kanziw.com.androidstart
+package com.kanziw.androidstart
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package kanziw.com.androidstart
+package com.kanziw.androidstart
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kanziw.com.androidstart">
+    package="com.kanziw.androidstart">
 
     <application
         android:allowBackup="true"
