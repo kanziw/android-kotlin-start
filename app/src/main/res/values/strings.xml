@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidStart</string>
+    <string name="MAIN_BUTTON_INCREMENT">+</string>
+    <string name="MAIN_BUTTON_DECREMENT">-</string>
 </resources>

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        RxView.clicks(button).subscribe({ println("") }).addTo(disposeBag)
+        RxView.clicks(button_inc).subscribe({ println("") }).addTo(disposeBag)
     }
 
     override fun onDestroy() {
