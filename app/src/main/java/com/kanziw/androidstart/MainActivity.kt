@@ -16,10 +16,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val streamInc = RxView.clicks(button_inc).map { 1 }//.subscribe({ println(" +") }).addTo(disposeBag)
-        val streamDec = RxView.clicks(button_dec).map { -1 }//.subscribe({ println(" -") }).addTo(disposeBag)
+        val streamInc = RxView.clicks(button_inc).map { 1 }
+        val streamDec = RxView.clicks(button_dec).map { -1 }
 
         Observable.merge(streamInc, streamDec)
+                .scan(0, { oldValue, newValue -> oldValue + newValue })
                 .map { it.toString() }
                 .subscribe(RxTextView.text(main_text))
                 .addTo(disposeBag)
