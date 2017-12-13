@@ -16,22 +16,36 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.main_view, CounterFragment.newInstance())
+                .add(R.id.main_view, CounterFragment.newInstance())
                 .commit()
 
         RxView.clicks(bottom_tab_1)
                 .subscribe {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_view, CounterFragment.newInstance())
-                            .commit()
+                    val fm = supportFragmentManager
+
+                    val currentFragment = fm.findFragmentById(R.id.main_view)
+                    if (currentFragment !is CounterFragment) {
+                        fm.fragments.find { it is CounterFragment }?.let {
+                            fm.beginTransaction().show(it).hide(currentFragment).commit()
+                        } ?: run {
+                            fm.beginTransaction().add(R.id.main_view, CounterFragment.newInstance()).hide(currentFragment).commit()
+                        }
+                    }
                 }
                 .addTo(disposeBag)
 
         RxView.clicks(bottom_tab_2)
                 .subscribe {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_view, ToDoListFragment.newInstance())
-                            .commit()
+                    val fm = supportFragmentManager
+
+                    val currentFragment = fm.findFragmentById(R.id.main_view)
+                    if (currentFragment !is ToDoListFragment) {
+                        fm.fragments.find { it is ToDoListFragment }?.let {
+                            fm.beginTransaction().show(it).hide(currentFragment).commit()
+                        } ?: run {
+                            fm.beginTransaction().add(R.id.main_view, ToDoListFragment.newInstance()).hide(currentFragment).commit()
+                        }
+                    }
                 }
                 .addTo(disposeBag)
     }
