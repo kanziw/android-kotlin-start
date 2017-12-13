@@ -37,5 +37,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_text" />
 
+    <LinearLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/BOTTOM_TAB_HEIGHT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <include
+            android:id="@+id/main_bottom_layout"
+            layout="@layout/bottom_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

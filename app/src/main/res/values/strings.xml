@@ -2,4 +2,7 @@
     <string name="app_name">AndroidStart</string>
     <string name="MAIN_BUTTON_INCREMENT">+</string>
     <string name="MAIN_BUTTON_DECREMENT">-</string>
+
+    <string name="BOTTOM_TAB_1">COUNTER</string>
+    <string name="BOTTOM_TAB_2">TO-DO LIST</string>
 </resources>
