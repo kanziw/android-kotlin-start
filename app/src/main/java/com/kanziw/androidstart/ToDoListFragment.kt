@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -43,7 +44,10 @@ class ToDoListFragment : Fragment() {
                 }
                 .addTo(disposeBag)
 
-        RxView.touches(recyclerView).subscribe { edit_text.hideKeyboard() }.addTo(disposeBag)
+        recyclerView.setOnTouchListener { _, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_UP) edit_text.hideKeyboard()
+            false
+        }
     }
 
     private fun View.hideKeyboard() {
