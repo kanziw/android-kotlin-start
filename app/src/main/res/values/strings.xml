@@ -1,8 +1,12 @@
 <resources>
+    <string name="SAVE">SAVE</string>
+
     <string name="app_name">AndroidStart</string>
     <string name="MAIN_BUTTON_INCREMENT">+</string>
     <string name="MAIN_BUTTON_DECREMENT">-</string>
 
     <string name="BOTTOM_TAB_1">COUNTER</string>
     <string name="BOTTOM_TAB_2">TO-DO LIST</string>
+
+    <string name="HELLO_TODO_LIST">Hello TO-DO LIST!</string>
 </resources>
