@@ -37,6 +37,7 @@ class ToDoListFragment : Fragment() {
                 .subscribe {
                     toDoTextList.add(it.toString())
                     edit_text.text.clear()
+                    recyclerView.adapter.notifyDataSetChanged()
                 }
                 .addTo(disposeBag)
     }
