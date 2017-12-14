@@ -2,10 +2,12 @@ package com.kanziw.androidstart
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.fragment_todolist.*
 
 class ToDoListFragment : Fragment() {
 
@@ -23,8 +25,11 @@ class ToDoListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        println(" TO-DO LIST Fragment Appeared!")
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = ToDoListAdapter(context, getLists())
     }
+
+    private fun getLists() = arrayListOf("JAVA", "KOTLIN", "PHP", "SWIFT", "JAVA Script", "MYSQL")
 
     companion object {
         fun newInstance() = ToDoListFragment()
