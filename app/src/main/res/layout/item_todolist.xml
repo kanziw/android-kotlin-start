@@ -25,6 +25,8 @@
         android:layout_height="match_parent"
         android:background="@null"
         android:contentDescription="@string/DESCRIPTION_CLEAR"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:src="@drawable/ic_clear_black_24px"
         app:layout_constraintLeft_toRightOf="@id/textView"
         app:layout_constraintRight_toRightOf="parent" />
