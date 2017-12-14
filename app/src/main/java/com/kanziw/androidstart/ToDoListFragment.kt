@@ -6,12 +6,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.fragment_todolist.*
 
 class ToDoListFragment : Fragment() {
 
     private val disposeBag = CompositeDisposable()
+    private val toDoTextList = ArrayList<String>()
 
     override fun onDestroy() {
         disposeBag.dispose()
@@ -26,10 +29,17 @@ class ToDoListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = ToDoListAdapter(context, getLists())
-    }
+        recyclerView.adapter = ToDoListAdapter(context, toDoTextList)
 
-    private fun getLists() = arrayListOf("JAVA", "KOTLIN", "PHP", "SWIFT", "JAVA Script", "MYSQL")
+        RxView.clicks(button_save)
+                .map { edit_text.text }
+                .filter { it.isNotEmpty() }
+                .subscribe {
+                    toDoTextList.add(it.toString())
+                    edit_text.text.clear()
+                }
+                .addTo(disposeBag)
+    }
 
     companion object {
         fun newInstance() = ToDoListFragment()
