@@ -9,4 +9,5 @@
     <string name="BOTTOM_TAB_2">TO-DO LIST</string>
 
     <string name="HELLO_TODO_LIST">Hello TO-DO LIST!</string>
+    <string name="DESCRIPTION_CLEAR">Clear your to-do item.</string>
 </resources>
