@@ -1,9 +1,11 @@
 package com.kanziw.androidstart
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun attachBottomTabButton(view: View, fragment: Fragment) {
         RxView.clicks(view)
                 .subscribe {
+                    view.hideKeyboard()
                     val ft = supportFragmentManager
                     val transaction = ft.beginTransaction()
 
@@ -41,6 +44,11 @@ class MainActivity : AppCompatActivity() {
                     transaction.commit()
                 }
                 .addTo(disposeBag)
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     override fun onDestroy() {
