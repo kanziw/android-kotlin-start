@@ -1,11 +1,13 @@
 package com.kanziw.androidstart
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -40,6 +42,13 @@ class ToDoListFragment : Fragment() {
                     recyclerView.adapter.notifyDataSetChanged()
                 }
                 .addTo(disposeBag)
+
+        RxView.touches(recyclerView).subscribe { edit_text.hideKeyboard() }.addTo(disposeBag)
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     companion object {
