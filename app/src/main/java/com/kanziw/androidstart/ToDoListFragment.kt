@@ -22,8 +22,8 @@ sealed class UIEvent {
 
 class ToDoListFragment : Fragment() {
     private val disposeBag = CompositeDisposable()
-    //    private val toDoTextList = ArrayList<String>()
-    private val toDoTextList = arrayListOf("a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M")
+    private val toDoTextList = ArrayList<String>()
+//    private val toDoTextList = arrayListOf("a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M", "a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M")
 
     override fun onDestroy() {
         disposeBag.dispose()
@@ -34,7 +34,6 @@ class ToDoListFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater?.inflate(R.layout.fragment_todolist, container, false)
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
