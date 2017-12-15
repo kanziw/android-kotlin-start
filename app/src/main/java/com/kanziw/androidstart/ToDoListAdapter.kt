@@ -24,7 +24,8 @@ class ToDoListAdapter(private val context: Context, private val lists: ArrayList
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, index: Int) {
         (holder as? Item)?.let { item ->
             val hash = item.itemView.hashCode()
-            disposeBagPerViewBinding[hash]?.dispose() ?: run { disposeBagPerViewBinding[hash] = CompositeDisposable() }
+            disposeBagPerViewBinding[hash]?.dispose()
+            disposeBagPerViewBinding[hash] = CompositeDisposable()
             disposeBagPerViewBinding[hash]?.let { item.bindData(lists[index], index, eventEmitter, it) }
         }
     }
