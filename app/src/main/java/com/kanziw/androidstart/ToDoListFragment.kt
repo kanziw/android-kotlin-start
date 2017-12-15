@@ -13,11 +13,14 @@ import android.view.inputmethod.InputMethodManager
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_todolist.*
 
-class ToDoListFragment : Fragment(), ToDoListInterface  {
+sealed class UIEvent {
+    data class RemoveItemEvent(val index: Int) : UIEvent()
+}
 
-
+class ToDoListFragment : Fragment() {
     private val disposeBag = CompositeDisposable()
     //    private val toDoTextList = ArrayList<String>()
     private val toDoTextList = arrayListOf("a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M")
@@ -32,10 +35,21 @@ class ToDoListFragment : Fragment(), ToDoListInterface  {
         return inflater?.inflate(R.layout.fragment_todolist, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = ToDoListAdapter(context, toDoTextList, this)
+
+        val eventEmitter = PublishSubject.create<UIEvent>()
+
+        recyclerView.adapter = ToDoListAdapter(context, toDoTextList, eventEmitter)
+
+        eventEmitter.subscribe {
+            when (it) {
+                is UIEvent.RemoveItemEvent -> removeToDoListItem(it.index)
+            }
+        }
+                .addTo(disposeBag)
 
         RxView.clicks(button_save)
                 .map { edit_text.text }
@@ -55,7 +69,7 @@ class ToDoListFragment : Fragment(), ToDoListInterface  {
         notifyDataSetChanged()
     }
 
-    override fun onDeleteItem(index: Int) {
+    private fun removeToDoListItem(index: Int) {
         toDoTextList.removeAt(index)
         notifyDataSetChanged()
     }
