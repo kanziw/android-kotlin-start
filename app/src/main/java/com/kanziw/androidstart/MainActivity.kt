@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val initialMainViewFragment = CounterFragment.newInstance()
-
         supportFragmentManager.beginTransaction()
                 .add(R.id.main_view, initialMainViewFragment)
                 .commit()
