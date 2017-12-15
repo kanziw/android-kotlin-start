@@ -4,6 +4,7 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -14,10 +15,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.fragment_todolist.*
 
-class ToDoListFragment : Fragment() {
+class ToDoListFragment : Fragment(), ToDoListInterface  {
+
 
     private val disposeBag = CompositeDisposable()
-    private val toDoTextList = ArrayList<String>()
+    //    private val toDoTextList = ArrayList<String>()
+    private val toDoTextList = arrayListOf("a", "b", "c", "d", "e", "F", "G", "H", "I", "J", "K", "L", "M")
 
     override fun onDestroy() {
         disposeBag.dispose()
@@ -32,16 +35,12 @@ class ToDoListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = ToDoListAdapter(context, toDoTextList)
+        recyclerView.adapter = ToDoListAdapter(context, toDoTextList, this)
 
         RxView.clicks(button_save)
                 .map { edit_text.text }
                 .filter { it.isNotEmpty() }
-                .subscribe {
-                    toDoTextList.add(it.toString())
-                    edit_text.text.clear()
-                    recyclerView.adapter.notifyDataSetChanged()
-                }
+                .subscribe { addToDoListItem(it) }
                 .addTo(disposeBag)
 
         recyclerView.setOnTouchListener { _, motionEvent ->
@@ -49,6 +48,19 @@ class ToDoListFragment : Fragment() {
             false
         }
     }
+
+    private fun addToDoListItem(item: Editable) {
+        toDoTextList.add(item.toString())
+        edit_text.text.clear()
+        notifyDataSetChanged()
+    }
+
+    override fun onDeleteItem(index: Int) {
+        toDoTextList.removeAt(index)
+        notifyDataSetChanged()
+    }
+
+    private fun notifyDataSetChanged() = recyclerView.adapter.notifyDataSetChanged()
 
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
