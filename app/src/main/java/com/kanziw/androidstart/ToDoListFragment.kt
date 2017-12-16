@@ -69,6 +69,7 @@ class ToDoListFragment : Fragment() {
     }
 
     private fun removeToDoListItem(index: Int) {
+        edit_text.hideKeyboard()
         toDoTextList.removeAt(index)
         notifyDataSetChanged()
     }
